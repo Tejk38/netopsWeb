@@ -276,8 +276,7 @@
       background-color: transparent; 
     }
 
-    /* Theme-specific styles for device explorer elements */
-    /* Dark theme */
+  
     body.dark .sidebar { 
       background-color: #222; 
       border-color: #444;
@@ -328,7 +327,7 @@
       border-left-color: #ddd;
     }
     
-    /* Green theme */
+   
     body.green .sidebar { 
       background-color: #f0f8f4; 
       border: 1px solid #c8e6d4;
@@ -380,7 +379,7 @@
       border-left-color: #b8c9e6;
     }
     
-    /* High contrast theme */
+   
     body.high .sidebar { 
       background-color: black; 
       border: 1px solid yellow;
@@ -406,7 +405,7 @@
       border-left-color: yellow;
     }
     
-    /* Active page button styling */
+  
     body.dark .pagination button.active { background-color: #4caf50; color: white; }
     body.light .pagination button.active { background-color: #4caf50; color: white; }
     body.green .pagination button.active { background-color: #006400; color: white; }
@@ -601,7 +600,7 @@
       filtered.sort((a, b) => a.vendor.localeCompare(b.vendor));
     }
 
-    // Update results count
+   
     resultsCount.textContent = `Showing ${Math.min(filtered.length, itemsPerPage)} of ${filtered.length} results`;
     
     renderItems(filtered);
@@ -633,7 +632,7 @@
       return `<button onclick="goToPage(${pageNum})" class="${isActive ? 'active' : ''}">${pageNum}</button>`;
     }).join('');
     
-    // Update results count after pagination
+    
     resultsCount.textContent = filteredItems.length > 0 ? 
       `Showing ${Math.min(end, filteredItems.length) - start} of ${filteredItems.length} results` : 
       'No results found';
@@ -649,15 +648,37 @@
     applyFilters();
   }
 
-  // Handle pressing Enter in search field
+  // Handle Enter key event in search field
   document.getElementById("searchInput").addEventListener("keyup", function(event) {
     if (event.key === "Enter") {
       filterItems();
     }
   });
 
-  // Initial render
+  // Helper to get URL parameters
+function getQueryParam(param) {
+  const urlParams = new URLSearchParams(window.location.search);
+  return urlParams.get(param);
+}
+
+// On page load, applying theme and search query from URL params
+window.addEventListener('DOMContentLoaded', () => {
+  const theme = getQueryParam('theme') || 'dark'; 
+  applyTheme(theme);
+
+  
+  document.body.className = theme;
+
+  // Set the search input value from URL param
+  const searchQuery = getQueryParam('q') || '';
+  const searchInput = document.getElementById('searchInput');
+  if (searchInput) {
+    searchInput.value = searchQuery;
+  }
+
+  
   applyFilters();
+});
 </script>
 
 </body>
