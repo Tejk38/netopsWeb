@@ -206,7 +206,7 @@
     color: yellow;
     }
 
-    /* Link color inside cards */
+    
     body.blue .card-content a {
     color: #004080;
     }
@@ -258,9 +258,9 @@
 
   <div id="searchBar" class="search-bar">
     🔍
-    <input type="text" placeholder="Search metrics, devices, vendors, OIDs, or ask anything"/>
+    <input type="text" id="searchInput" placeholder="Search metrics, devices, vendors, OIDs, or ask anything"/>
     <span>|</span>
-    <button>Browse all vendors and devices</button>
+     <a href="index1.html"><button id="searchButton">Browse all vendors and devices</button></a>
   </div>
 
   <button class="cert-btn">📄 Request Certification</button>
@@ -271,23 +271,23 @@
       <div class="card-content">
         <h2>Network Observability</h2>
         <p>Turn complex network infrastructure into high value connected experiences</p>
-        <a href="#">Learn more</a>
+        <a href="https://networkobservability.broadcom.com/">Learn more</a>
       </div>
     </div>
     <div class="card" id="card2">
-      <img src="img1.jpg" alt="Technical Documentation" />
+      <img src="img2.jpg" alt="Technical Documentation" />
       <div class="card-content">
         <h2>Technical Documentation</h2>
         <p>Learn how to use your product, best practices and troubleshoot problems</p>
-        <a href="#">Learn more</a>
+        <a href="https://techdocs.broadcom.com/us/en/ca-enterprise-software/it-operations-management/dx-netops/24-3.html">Learn more</a>
       </div>
     </div>
     <div class="card" id="card3">
-      <img src="img1.jpg" alt="Learn More" />
+      <img src="img3.jpg" alt="Learn More" />
       <div class="card-content">
         <h2>Looking To Learn More?</h2>
         <p>Check out our complete Broadcom Software Academy training website</p>
-        <a href="#">Learn more</a>
+        <a href="https://academy.broadcom.com/network-observability/network-monitoring">Learn more</a>
       </div>
     </div>
   </div>
@@ -296,9 +296,9 @@
 <footer>
   <p>© 2005-2025 Broadcom. All Rights Reserved.</p>
   <div>
-    <a href="#">Privacy Policy</a>
-    <a href="#">Cookie Policy</a>
-    <a href="#">Terms of Use</a>
+    <a href="https://www.broadcom.com/company/legal/privacy/policy">Privacy Policy</a>
+    <a href="https://www.broadcom.com/company/legal/privacy/cookie-policy">Cookie Policy</a>
+    <a href="https://www.broadcom.com/company/legal/terms-of-use">Terms of Use</a>
     <a href="#">Contact Us</a>
   </div>
 </footer>
@@ -363,6 +363,34 @@
       break;
   }
 }
+
+ function handleSearch() {
+    const searchQuery = document.getElementById('searchInput').value.trim();
+    
+ 
+    const currentTheme = document.body.className;
+    
+    
+    window.location.href = `index1.html?q=${encodeURIComponent(searchQuery)}&theme=${currentTheme}`;
+  }
+  
+  // Event listener for Enter key
+  document.getElementById('searchInput').addEventListener('keyup', function(event) {
+    if (event.key === 'Enter') {
+      handleSearch();
+    }
+  });
+  
+  // Event listener for search button click
+  document.getElementById('searchButton').addEventListener('click', function() {
+    // empty input 
+    const searchInput = document.getElementById('searchInput');
+    if (searchInput.value.trim() === '') {
+      window.location.href = 'index1.html';
+    } else {
+      handleSearch();
+    }
+  });
 
 </script>
 
